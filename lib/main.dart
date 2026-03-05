@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/core/consts.dart';
+import 'package:quiz_app/features/quiz_feature/cubit/cubit/quiz_cubit.dart';
 import 'package:quiz_app/features/quiz_feature/screens/homescreen.dart';
 
 void main() {
@@ -11,15 +13,18 @@ class QuizApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (context) => QuizCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
 
-      theme: ThemeData(
-        primarySwatch: AppConsts.primarycolor,
-        appBarTheme: AppBarTheme(backgroundColor: AppConsts.secondarycolor),
-        scaffoldBackgroundColor: AppConsts.secondarycolor,
+        theme: ThemeData(
+          primarySwatch: AppConsts.primarycolor,
+          appBarTheme: AppBarTheme(backgroundColor: AppConsts.secondarycolor),
+          scaffoldBackgroundColor: AppConsts.secondarycolor,
+        ),
+        home: HomeScreen(),
       ),
-      home: HomeScreen(),
     );
   }
 }

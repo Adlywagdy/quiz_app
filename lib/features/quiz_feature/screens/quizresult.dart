@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/core/consts.dart';
+import 'package:quiz_app/features/quiz_feature/cubit/cubit/quiz_cubit.dart';
 import 'package:quiz_app/features/quiz_feature/screens/homescreen.dart';
 import 'package:quiz_app/features/quiz_feature/screens/quizscreen.dart';
 import 'package:quiz_app/features/quiz_feature/widgets/custombutton.dart';
@@ -61,7 +62,9 @@ class QuizResult extends StatelessWidget {
                       CustomIcon(
                         radius: 10,
                         icon: Icons.star_rounded,
-                        backgroundColor: AppConsts.primarycolor,
+                        backgroundColor: ispassed
+                            ? AppConsts.primarycolor
+                            : Colors.red,
                         iconcolor: AppConsts.secondarycolor,
                         iconsize: 15,
                       ),
@@ -72,11 +75,11 @@ class QuizResult extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "9",
+                        "${QuizCubit.score}",
                         style: TextStyle(fontSize: 30, fontWeight: .w500),
                       ),
                       Text(
-                        " /10",
+                        " /${QuizCubit.questions.length}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: .w500,
@@ -88,6 +91,43 @@ class QuizResult extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return ListView.builder(
+                      padding: EdgeInsets.all(18),
+
+                      itemCount: QuizCubit.failedquestions.length,
+                      itemBuilder: (context, index) {
+                        return Text(
+                          QuizCubit.failedquestions[index].question,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: AppConsts.secondarycolor,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(color: AppConsts.greycolor, blurRadius: 3),
+                  ],
+                ),
+
+                child: Text("tap to see your failed questions"),
+              ),
+            ),
             Spacer(),
             CustomButton(
               icon: Icons.replay,
@@ -96,6 +136,9 @@ class QuizResult extends StatelessWidget {
               backgroundColor: AppConsts.primarycolor,
               textColor: AppConsts.secondarycolor,
               onPressed: () {
+                QuizCubit.questionindex = 0;
+                QuizCubit.score = 0;
+                QuizCubit.currentanswer = null;
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -118,6 +161,9 @@ class QuizResult extends StatelessWidget {
               backgroundColor: AppConsts.secondarycolor,
               textColor: Colors.black,
               onPressed: () {
+                QuizCubit.questionindex = 0;
+                QuizCubit.score = 0;
+                QuizCubit.currentanswer = null;
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

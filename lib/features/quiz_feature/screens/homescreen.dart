@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:quiz_app/core/consts.dart';
+
 import 'package:quiz_app/features/quiz_feature/screens/quizscreen.dart';
 import 'package:quiz_app/features/quiz_feature/widgets/custombutton.dart';
 import 'package:quiz_app/features/quiz_feature/widgets/customicon.dart';
@@ -46,13 +48,14 @@ class HomeScreen extends StatelessWidget {
                 backgroundColor: AppConsts.secondarycolor,
                 textColor: AppConsts.primarycolor,
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
                         return Quizscreen();
                       },
                     ),
+                    (route) => false,
                   );
                 },
               ),

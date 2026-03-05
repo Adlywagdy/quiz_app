@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/core/consts.dart';
-import 'package:quiz_app/features/quiz_feature/models/questionmodel.dart';
+import 'package:quiz_app/features/quiz_feature/cubit/cubit/quiz_cubit.dart';
 
 class CustomAnswersItem extends StatelessWidget {
   final int questionsindex;
-  final int index;
-  CustomAnswersItem({
+  final int answersindex;
+  final void Function()? onTap;
+  final bool selected;
+  const CustomAnswersItem({
     super.key,
     required this.questionsindex,
-    required this.index,
+    required this.answersindex,
+    this.onTap,
+    required this.selected,
   });
-  bool selected = true;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -38,7 +42,7 @@ class CustomAnswersItem extends StatelessWidget {
                   backgroundColor: AppConsts.greycolor.withValues(alpha: .15),
                 ),
           title: Text(
-            questions[questionsindex].options[index],
+            QuizCubit.questions[questionsindex].options[answersindex],
             style: TextStyle(fontWeight: .w500),
           ),
           trailing: selected

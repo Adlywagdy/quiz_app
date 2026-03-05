@@ -1,5 +1,11 @@
 part of 'quiz_cubit.dart';
 
-abstract class QuizState {}
+abstract class QuizStates {}
 
-final class QuizInitial extends QuizState {}
+final class QuizInitialstate extends QuizStates {}
+
+final class Quizsucessstate extends QuizStates {}
+
+final class QuizFailedstate extends QuizStates {}
+
+final class QuizLoadingstate extends QuizStates {}
