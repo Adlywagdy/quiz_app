@@ -8,7 +8,7 @@ class QuizCubit extends Cubit<QuizStates> {
   static int questionindex = 0;
   static int score = 0;
   static String? currentanswer;
-  static String previousanswer = "";
+  static String? previousanswer;
   static List<QuestionModel> questions = [
     QuestionModel(
       question: "What is the capital of France?",
