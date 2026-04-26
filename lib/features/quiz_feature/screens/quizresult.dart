@@ -136,9 +136,7 @@ class QuizResult extends StatelessWidget {
               backgroundColor: AppConsts.primarycolor,
               textColor: AppConsts.secondarycolor,
               onPressed: () {
-                QuizCubit.questionindex = 0;
-                QuizCubit.score = 0;
-                QuizCubit.currentanswer = null;
+                QuizCubit.resetQuizProgress();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -161,9 +159,7 @@ class QuizResult extends StatelessWidget {
               backgroundColor: AppConsts.secondarycolor,
               textColor: Colors.black,
               onPressed: () {
-                QuizCubit.questionindex = 0;
-                QuizCubit.score = 0;
-                QuizCubit.currentanswer = null;
+                QuizCubit.resetQuizProgress();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

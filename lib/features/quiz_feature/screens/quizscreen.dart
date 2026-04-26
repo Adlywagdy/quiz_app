@@ -18,22 +18,38 @@ class Quizscreen extends StatelessWidget {
         title: Text('Quiz', style: TextStyle(fontWeight: .w500)),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: BlocBuilder<QuizCubit, QuizStates>(
-                builder: (context, state) {
-                  return CustomLinearProgressIndicator();
-                },
+      body: BlocBuilder<QuizCubit, QuizStates>(
+        builder: (context, state) {
+          if (state is QuizLoadingstate && QuizCubit.questions.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (QuizCubit.questions.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('No questions found.'),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<QuizCubit>().loadQuestions();
+                    },
+                    child: Text('Reload'),
+                  ),
+                ],
               ),
-            ),
-            SliverToBoxAdapter(child: SizedBox(height: 20)),
-            SliverToBoxAdapter(
-              child: BlocBuilder<QuizCubit, QuizStates>(
-                builder: (context, state) {
-                  return Column(
+            );
+          }
+
+          return Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(child: CustomLinearProgressIndicator()),
+                SliverToBoxAdapter(child: SizedBox(height: 20)),
+                SliverToBoxAdapter(
+                  child: Column(
                     children: [
                       Text(
                         QuizCubit.questions[QuizCubit.questionindex].question,
@@ -44,16 +60,14 @@ class Quizscreen extends StatelessWidget {
                       ),
                       SizedBox(height: 15),
                     ],
-                  );
-                },
-              ),
-            ),
-            SliverList.builder(
-              itemCount:
-                  QuizCubit.questions[QuizCubit.questionindex].options.length,
-              itemBuilder: (context, index) {
-                return BlocBuilder<QuizCubit, QuizStates>(
-                  builder: (context, state) {
+                  ),
+                ),
+                SliverList.builder(
+                  itemCount: QuizCubit
+                      .questions[QuizCubit.questionindex]
+                      .options
+                      .length,
+                  itemBuilder: (context, index) {
                     return CustomAnswersItem(
                       questionsindex: QuizCubit.questionindex,
                       answersindex: index,
@@ -71,14 +85,10 @@ class Quizscreen extends StatelessWidget {
                           : false,
                     );
                   },
-                );
-              },
-            ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: BlocBuilder<QuizCubit, QuizStates>(
-                builder: (context, state) {
-                  return Column(
+                ),
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Column(
                     mainAxisAlignment: .end,
                     children: [
                       CustomButton(
@@ -179,12 +189,12 @@ class Quizscreen extends StatelessWidget {
                         ),
                       ),
                     ],
-                  );
-                },
-              ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -7,18 +7,26 @@ class CustomLinearProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final totalQuestions = QuizCubit.questions.length;
+    final currentQuestion = totalQuestions == 0
+        ? 0
+        : QuizCubit.questionindex + 1;
+    final progressValue = totalQuestions == 0
+        ? 0.0
+        : currentQuestion / totalQuestions;
+
     return Column(
       children: [
         Row(
           mainAxisAlignment: .spaceBetween,
           children: [
             Text(
-              "Question ${QuizCubit.questionindex} of ${QuizCubit.questions.length}",
+              "Question $currentQuestion of $totalQuestions",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
 
             Text(
-              "${(QuizCubit.questionindex * 10)}% complete",
+              "${(progressValue * 100).toStringAsFixed(0)}% complete",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -29,7 +37,7 @@ class CustomLinearProgressIndicator extends StatelessWidget {
         ),
         SizedBox(height: 8),
         LinearProgressIndicator(
-          value: QuizCubit.questionindex / 10,
+          value: progressValue,
           color: AppConsts.primarycolor,
           backgroundColor: AppConsts.primarycolor.withValues(alpha: .15),
           minHeight: 10,

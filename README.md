@@ -1,16 +1,36 @@
 # quiz_app
 
-A new Flutter project.
+Flutter quiz app integrated with Firebase and Cloud Firestore.
 
-## Getting Started
+## Firestore Collection Structure
 
-This project is a starting point for a Flutter application.
+Collection: `questions`
 
-A few resources to get you started if this is your first Flutter project:
+Each document contains:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `question` (String)
+- `options` (List<String>)
+- `answer` (String)
+- `createdAt` (Timestamp)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Add Question Function
+
+The function used to add a new question is:
+
+- `QuizCubit.addQuestionToFirebase(...)`
+
+Example:
+
+```dart
+context.read<QuizCubit>().addQuestionToFirebase(
+	question: 'What is Flutter?',
+	options: ['SDK', 'Database', 'IDE', 'Browser'],
+	answer: 'SDK',
+);
+```
+
+## Notes
+
+- Firebase is initialized in `main.dart`.
+- Questions are loaded from Firestore on app startup.
+- If Firestore is empty, default seed questions are inserted once.

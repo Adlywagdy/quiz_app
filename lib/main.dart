@@ -1,11 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/core/consts.dart';
+import 'package:quiz_app/firebase_options.dart';
 import 'package:quiz_app/features/quiz_feature/cubit/cubit/quiz_cubit.dart';
 import 'package:quiz_app/features/quiz_feature/screens/homescreen.dart';
 
-void main() {
-  runApp(QuizApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const QuizApp());
 }
 
 class QuizApp extends StatelessWidget {
