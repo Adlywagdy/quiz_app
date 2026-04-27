@@ -8,6 +8,7 @@ import 'package:quiz_app/features/quiz_feature/screens/add_question_screen.dart'
 import 'package:quiz_app/features/quiz_feature/screens/quizscreen.dart';
 import 'package:quiz_app/features/quiz_feature/widgets/custombutton.dart';
 import 'package:quiz_app/features/quiz_feature/widgets/customicon.dart';
+import 'package:quiz_app/l10n/generated/app_localizations.dart' as ln10n10;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -88,7 +89,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 12),
                         CustomButton(
-                          text: "Add Question",
+                          text: ln10n10.AppLocalizations.of(
+                            context,
+                          )!.addQuestion,
                           backgroundColor: AppConsts.secondarycolor,
                           textColor: AppConsts.primarycolor,
                           icon: Icons.add_circle_outline_rounded,

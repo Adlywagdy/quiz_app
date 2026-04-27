@@ -1,0 +1,10 @@
+{
+    "@@locale": "en",
+    "appTitle": "Quiz App",
+    "startQuiz": "Start Quiz",
+    "addQuestion": "Add Question",
+    "question": "Question",
+    "score": "Score",
+    "next": "Next",
+    "finish": "Finish"
+}

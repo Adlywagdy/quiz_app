@@ -1,0 +1,10 @@
+{
+    "@@locale": "ar",
+    "appTitle": "تطبيق الاختبار",
+    "startQuiz": "ابدأ الاختبار",
+    "addQuestion": "إضافة سؤال",
+    "question": "السؤال",
+    "score": "النتيجة",
+    "next": "التالي",
+    "finish": "إنهاء"
+}

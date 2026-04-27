@@ -5,6 +5,7 @@ import 'package:quiz_app/core/consts.dart';
 import 'package:quiz_app/firebase_options.dart';
 import 'package:quiz_app/features/quiz_feature/cubit/cubit/quiz_cubit.dart';
 import 'package:quiz_app/features/quiz_feature/screens/homescreen.dart';
+import 'package:quiz_app/l10n/generated/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,9 @@ class QuizApp extends StatelessWidget {
       create: (context) => QuizCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-
+        locale: Locale('ar'),
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
         theme: ThemeData(
           primarySwatch: AppConsts.primarycolor,
           appBarTheme: AppBarTheme(backgroundColor: AppConsts.secondarycolor),
