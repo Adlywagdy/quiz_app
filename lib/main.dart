@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/core/consts.dart';
 import 'package:quiz_app/firebase_options.dart';
 import 'package:quiz_app/features/quiz_feature/cubit/cubit/quiz_cubit.dart';
-import 'package:quiz_app/features/quiz_feature/screens/homescreen.dart';
+import 'package:quiz_app/features/auth_feature/screens/login_screen.dart';
 import 'package:quiz_app/l10n/generated/app_localizations.dart';
 
 Future<void> main() async {
@@ -25,12 +25,12 @@ class QuizApp extends StatelessWidget {
         locale: Locale('ar'),
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-        theme: ThemeData(
+        theme: ThemeData(  
           primarySwatch: AppConsts.primarycolor,
           appBarTheme: AppBarTheme(backgroundColor: AppConsts.secondarycolor),
           scaffoldBackgroundColor: AppConsts.secondarycolor,
         ),
-        home: HomeScreen(),
+        home: LoginScreen(),
       ),
     );
   }
